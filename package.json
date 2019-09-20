@@ -1,0 +1,98 @@
+{
+  "name": "projectQ",
+  "displayName": "projectQ",
+  "description": "Quincy's project manager tool",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.38.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onView:projectQList",
+    "onCommand:projectQ.add",
+    "onCommand:projectQ.open",
+    "onCommand:projectQ.list",
+    "onCommand:projectQ.active"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "projectQ.add",
+        "title": "projectQ add project"
+      },
+      {
+        "command": "projectQ.open",
+        "title": "projectQ open project"
+      },
+      {
+        "command": "projectQ.list",
+        "title": "projectQ list projects"
+      },
+      {
+        "command": "projectQ.active",
+        "title": "projectQ active"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "projectQ",
+          "title": "ProjectQ",
+          "icon": "image/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "projectQ": [
+        {
+          "id": "projectQList",
+          "name": "project list"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "projectQ.add"
+        },
+        {
+          "command": "projectQ.list"
+        }
+      ]
+    },
+    "configuration": {
+      "projectQ.configLocation": {
+        "type": "string",
+        "default": "",
+        "description": "projectQ.json store place"
+      }
+    },
+    "keybindings": [
+      {
+        "command": "projectQ.listProjects",
+        "key": "shift+alt+p",
+        "mac": "cmd+alt+p"
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "webpack --watch --mode development --info-verbosity verbose",
+    "build": "webpack --mode development",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.12.21",
+    "@types/vscode": "^1.38.0",
+    "eslint": "^5.13.0",
+    "glob": "^7.1.4",
+    "mocha": "^6.1.4",
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.36",
+    "vscode-test": "^1.0.2"
+  }
+}
