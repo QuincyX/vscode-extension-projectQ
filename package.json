@@ -2,7 +2,7 @@
   "name": "projectQ",
   "displayName": "projectQ",
   "description": "Quincy's project manager tool",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.38.0"
   },
@@ -12,28 +12,54 @@
   "main": "./src/extension.js",
   "activationEvents": [
     "onView:projectQList",
-    "onCommand:projectQ.add",
-    "onCommand:projectQ.open",
-    "onCommand:projectQ.list",
-    "onCommand:projectQ.active"
+    "onCommand:projectQ.addProject",
+    "onCommand:projectQ.openProject",
+    "onCommand:projectQ.listProject",
+    "onCommand:projectQ.addCategory",
+    "onCommand:projectQ.deleteCategory"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "projectQ.add",
-        "title": "projectQ add project"
+        "command": "projectQ.addProject",
+        "title": "projectQ: add current project"
       },
       {
-        "command": "projectQ.open",
-        "title": "projectQ open project"
+        "command": "projectQ.openProject",
+        "title": "projectQ: open project"
+      },
+      {
+        "command": "projectQ.deleteProject",
+        "title": "projectQ: delete project"
+      },
+      {
+        "command": "projectQ.renameProject",
+        "title": "projectQ: rename project"
+      },
+      {
+        "command": "projectQ.changeCategory",
+        "title": "projectQ: change project's category"
+      },
+      {
+        "command": "projectQ.addCategory",
+        "title": "projectQ: add category"
+      },
+      {
+        "command": "projectQ.deleteCategory",
+        "title": "projectQ: delete category"
+      },
+      {
+        "command": "projectQ.refresh",
+        "title": "projectQ: refresh project list",
+        "icon": "image/refresh.svg"
       },
       {
         "command": "projectQ.list",
-        "title": "projectQ list projects"
+        "title": "projectQ: list projects"
       },
       {
         "command": "projectQ.active",
-        "title": "projectQ active"
+        "title": "projectQ: active"
       }
     ],
     "viewsContainers": {
@@ -54,12 +80,41 @@
       ]
     },
     "menus": {
-      "view/title": [
+      "view/item/context": [
         {
-          "command": "projectQ.add"
+          "command": "projectQ.openProject",
+          "when": "viewItem == project"
         },
         {
-          "command": "projectQ.list"
+          "command": "projectQ.renameProject",
+          "when": "viewItem == project"
+        },
+        {
+          "command": "projectQ.changeCategory",
+          "when": "viewItem == project"
+        },
+        {
+          "command": "projectQ.deleteProject",
+          "when": "viewItem == project"
+        },
+        {
+          "command": "projectQ.deleteCategory",
+          "when": "viewItem == category"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "projectQ.refresh",
+          "title": "refresh project list",
+          "group": "navigation"
+        },
+        {
+          "command": "projectQ.addProject",
+          "title": "add current folder as a project"
+        },
+        {
+          "command": "projectQ.addCategory",
+          "title": "add a new project category"
         }
       ]
     },
@@ -94,5 +149,10 @@
     "typescript": "^3.3.1",
     "vscode": "^1.1.36",
     "vscode-test": "^1.0.2"
+  },
+  "dependencies": {
+    "lodash-id": "^0.14.0",
+    "lowdb": "^1.0.0",
+    "shortid": "^2.2.15"
   }
 }
