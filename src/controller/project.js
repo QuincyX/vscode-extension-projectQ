@@ -3,11 +3,11 @@ const util = require('../util/index')
 const db = require('../service/db')
 
 module.exports = {
-  add: function() {
+  add: function(category = 'default') {
     const workspaceInfo = util.getWorkspaceInfo()
     return db
       .get('project')
-      .insert({ ...workspaceInfo, category: 'default' })
+      .insert({ ...workspaceInfo, category })
       .write()
   },
   open: function(project) {

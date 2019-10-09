@@ -1,8 +1,8 @@
 {
-  "name": "projectQ",
+  "name": "project-q",
   "displayName": "projectQ",
-  "description": "Quincy's project manager tool",
-  "version": "0.0.2",
+  "description": "Quincy's project manager toolkit",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.38.0"
   },
@@ -12,11 +12,7 @@
   "main": "./src/extension.js",
   "activationEvents": [
     "onView:projectQList",
-    "onCommand:projectQ.addProject",
-    "onCommand:projectQ.openProject",
-    "onCommand:projectQ.listProject",
-    "onCommand:projectQ.addCategory",
-    "onCommand:projectQ.deleteCategory"
+    "onCommand:projectQ.addProject"
   ],
   "contributes": {
     "commands": [

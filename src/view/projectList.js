@@ -1,8 +1,5 @@
 const vscode = require('vscode')
-const storage2 = require('../controller/storage2')
 const controller = require('../controller/index')
-const db = require('../service/db')
-const util = require('../util/index')
 
 module.exports = class ProjectListProvider {
   constructor(context) {
@@ -35,8 +32,6 @@ module.exports = class ProjectListProvider {
   }
   getParent() {
     console.log('getParent')
-    console.log(storage2.getCategoryList())
-    return storage2.getCategoryList()
   }
   getChildren(category) {
     if (category) {

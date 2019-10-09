@@ -20,6 +20,7 @@ module.exports = {
         toast('projectQ: extension active!')
       })
     )
+    // 添加新类别
     vscode.commands.registerCommand('projectQ.addCategory', () => {
       let category = {
         name: ''
@@ -41,6 +42,7 @@ module.exports = {
           }
         })
     })
+    // 删除选中类别，该类别下的项目转移至default分类
     vscode.commands.registerCommand('projectQ.deleteCategory', payload => {
       if (payload.id === 'default') {
         toast('不能删除默认分类')
@@ -50,18 +52,30 @@ module.exports = {
         projectListProvider.refresh()
       }
     })
+    // 当前打开的文件夹添加至项目列表
     vscode.commands.registerCommand('projectQ.addProject', () => {
-      controller.project.add()
-      projectListProvider.refresh()
+      const categoryList = controller.category.getList()
+      vscode.window
+        .showQuickPick(categoryList.map(o => o.id + ': ' + o.label), {
+          placeHolder: 'choose a category'
+        })
+        .then(res => {
+          const categoryId = res.split(':')[0]
+          controller.project.add(categoryId)
+          projectListProvider.refresh()
+        })
     })
+    // 从列表中删除选中类别
     vscode.commands.registerCommand('projectQ.deleteProject', payload => {
       controller.project.delete(payload)
       toast('projectQ: delete project success!')
       projectListProvider.refresh()
     })
+    // 打开项目（切换项目）
     vscode.commands.registerCommand('projectQ.openProject', payload => {
       controller.project.open(payload)
     })
+    // 重命名项目
     vscode.commands.registerCommand('projectQ.renameProject', payload => {
       vscode.window
         .showInputBox({
@@ -80,9 +94,9 @@ module.exports = {
           }
         })
     })
+    // 修改项目分组
     vscode.commands.registerCommand('projectQ.changeCategory', project => {
       const categoryList = controller.category.getList()
-      console.log(categoryList)
       vscode.window
         .showQuickPick(categoryList.map(o => o.id + ': ' + o.label), {
           placeHolder: 'choose a category'
@@ -93,11 +107,9 @@ module.exports = {
           projectListProvider.refresh()
         })
     })
+    // 刷新视图
     vscode.commands.registerCommand('projectQ.refresh', () => {
       projectListProvider.refresh()
-    })
-    vscode.commands.registerCommand('projectQ.list', function() {
-      toast('projectQ list projects!')
     })
   }
 }
