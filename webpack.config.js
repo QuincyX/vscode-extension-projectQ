@@ -12,5 +12,8 @@ module.exports = {
   devtool: 'source-map',
   externals: {
     vscode: 'commonjs vscode'
+  },
+  resolve: {
+    extensions: ['.js']
   }
 }
