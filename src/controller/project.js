@@ -17,6 +17,14 @@ module.exports = {
       false
     )
   },
+  openInNewWindow: function(project) {
+
+    return vscode.commands.executeCommand(
+      'vscode.openFolder',
+      vscode.Uri.file(project.rootPath),
+      true
+    )
+  },
   delete: function(project) {
     if (project) {
       return db

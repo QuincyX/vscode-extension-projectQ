@@ -10,7 +10,7 @@ function toast(text) {
 module.exports = {
   activate: function(context) {
     const projectListProvider = new ProjectListProvider(context)
-    vscode.window.registerTreeDataProvider('projectQList', projectListProvider)
+    vscode.window.registerTreeDataProvider('projectQListView', projectListProvider)
     fs.watchFile(util.getProjectFilePath(), { interval: 100 }, (prev, next) => {
       util.loadProjectsFile()
       projectListProvider.refresh()
@@ -68,13 +68,20 @@ module.exports = {
     // 从列表中删除选中类别
     vscode.commands.registerCommand('projectQ.deleteProject', payload => {
       controller.project.delete(payload)
-      toast('projectQ: delete project success!')
+      toast('projectQ: 删除项目成功!')
       projectListProvider.refresh()
     })
     // 打开项目（切换项目）
     vscode.commands.registerCommand('projectQ.openProject', payload => {
       controller.project.open(payload)
     })
+    vscode.commands.registerCommand(
+      'projectQ.openProjectInNewWindow',
+      payload => {
+        console.log('okok')
+        controller.project.openInNewWindow(payload)
+      }
+    )
     // 重命名项目
     vscode.commands.registerCommand('projectQ.renameProject', payload => {
       vscode.window
@@ -99,7 +106,7 @@ module.exports = {
       const categoryList = controller.category.getList()
       vscode.window
         .showQuickPick(categoryList.map(o => o.id + ': ' + o.label), {
-          placeHolder: 'choose a category'
+          placeHolder: '选择项目分组'
         })
         .then(res => {
           const categoryId = res.split(':')[0]

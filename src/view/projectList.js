@@ -3,7 +3,8 @@ const controller = require('../controller/index')
 
 module.exports = class ProjectListProvider {
   constructor(context) {
-    this.iconPath = context.asAbsolutePath('image/icon.svg')
+    this.listIconPath = context.asAbsolutePath('image/list.svg')
+    this.folderIconPath = context.asAbsolutePath('image/folder.svg')
     this.internalOnDidChangeTreeData = new vscode.EventEmitter()
     this.onDidChangeTreeData = this.internalOnDidChangeTreeData.event
   }
@@ -15,13 +16,13 @@ module.exports = class ProjectListProvider {
   getTreeItem(element) {
     if (element.contextValue === 'category') {
       return {
-        ...element
-        // iconPath: this.iconPath
+        ...element,
+        iconPath: this.listIconPath
       }
     } else {
       return {
         ...element,
-        iconPath: this.iconPath,
+        iconPath: this.folderIconPath,
         command: {
           command: 'projectQ.open',
           title: '',

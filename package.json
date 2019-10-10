@@ -16,47 +16,52 @@
   ],
   "main": "./dist/extension.js",
   "activationEvents": [
-    "onView:projectQList",
+    "*",
+    "onView:projectQListView",
     "onCommand:projectQ.addProject"
   ],
   "contributes": {
     "commands": [
       {
         "command": "projectQ.addProject",
-        "title": "projectQ: add current project"
+        "title": "添加当前目录到项目列表"
       },
       {
         "command": "projectQ.openProject",
-        "title": "projectQ: open project"
+        "title": "打开项目"
+      },
+      {
+        "command": "projectQ.openProjectInNewWindow",
+        "title": "在新窗口中打开项目"
       },
       {
         "command": "projectQ.deleteProject",
-        "title": "projectQ: delete project"
+        "title": "删除项目"
       },
       {
         "command": "projectQ.renameProject",
-        "title": "projectQ: rename project"
+        "title": "重命名项目"
       },
       {
         "command": "projectQ.changeCategory",
-        "title": "projectQ: change project's category"
+        "title": "修改项目分组"
       },
       {
         "command": "projectQ.addCategory",
-        "title": "projectQ: add category"
+        "title": "添加新分组"
       },
       {
         "command": "projectQ.deleteCategory",
-        "title": "projectQ: delete category"
+        "title": "删除分组"
       },
       {
         "command": "projectQ.refresh",
-        "title": "projectQ: refresh project list",
+        "title": "刷新项目列表",
         "icon": "image/refresh.svg"
       },
       {
         "command": "projectQ.list",
-        "title": "projectQ: list projects"
+        "title": "列出所有项目"
       },
       {
         "command": "projectQ.active",
@@ -75,7 +80,7 @@
     "views": {
       "projectQ": [
         {
-          "id": "projectQList",
+          "id": "projectQListView",
           "name": "project list"
         }
       ]
@@ -84,7 +89,13 @@
       "view/item/context": [
         {
           "command": "projectQ.openProject",
-          "when": "viewItem == project"
+          "when": "viewItem == project",
+          "group": "handleOpen"
+        },
+        {
+          "command": "projectQ.openProjectInNewWindow",
+          "when": "viewItem == project",
+          "group": "handleOpen"
         },
         {
           "command": "projectQ.renameProject",
@@ -106,16 +117,16 @@
       "view/title": [
         {
           "command": "projectQ.refresh",
-          "title": "refresh project list",
+          "when": "view == projectQListView",
           "group": "navigation"
         },
         {
           "command": "projectQ.addProject",
-          "title": "add current folder as a project"
+          "when": "view == projectQListView"
         },
         {
           "command": "projectQ.addCategory",
-          "title": "add a new project category"
+          "when": "view == projectQListView"
         }
       ]
     },
