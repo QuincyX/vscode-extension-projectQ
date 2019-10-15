@@ -18940,6 +18940,15 @@ module.exports = {
       .insert({ id: shortid.generate(), label: category.label })
       .write()
   },
+  edit: function(category) {
+    if (category) {
+      return db
+        .get('category')
+        .getById(category.id)
+        .assign(category)
+        .write()
+    }
+  },
   getList: function() {
     return db
       .get('category')
@@ -19090,7 +19099,7 @@ module.exports = {
       'projectQListView',
       projectListProvider
     )
-    // 添加新类别
+    // 添加新分组
     vscode.commands.registerCommand('projectQ.addCategory', () => {
       vscode.window
         .showInputBox({
@@ -19107,7 +19116,24 @@ module.exports = {
           }
         })
     })
-    // 删除选中类别，该类别下的项目转移至default分类
+    // 重命名分组
+    vscode.commands.registerCommand('projectQ.renameCategory', payload => {
+      vscode.window
+        .showInputBox({
+          prompt: '分组名称',
+          placeHolder: '请输入新的分组名',
+          value: payload.label
+        })
+        .then(newName => {
+          if (!newName) {
+            vscode.window.showWarningMessage('必须输入新的分组名称')
+          } else {
+            controller.category.edit({ id: payload.id, label: newName })
+            projectListProvider.refresh()
+          }
+        })
+    })
+    // 删除选中分组，该分组下的项目转移至default分组
     vscode.commands.registerCommand('projectQ.deleteCategory', payload => {
       if (payload.id === 'default') {
         toast('不能删除默认分类')
@@ -19169,11 +19195,11 @@ module.exports = {
     vscode.commands.registerCommand('projectQ.changeCategory', project => {
       const categoryList = controller.category.getList()
       vscode.window
-        .showQuickPick(categoryList.map(o => o.id + ': ' + o.label), {
+        .showQuickPick(categoryList.map(o => o.label + ' - ' + o.id), {
           placeHolder: '选择项目分组'
         })
         .then(res => {
-          const categoryId = res.split(':')[0]
+          const categoryId = res.split(' - ')[1]
           controller.project.changeCategory(project.id, categoryId)
           projectListProvider.refresh()
         })

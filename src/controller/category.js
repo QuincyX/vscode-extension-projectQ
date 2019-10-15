@@ -9,6 +9,15 @@ module.exports = {
       .insert({ id: shortid.generate(), label: category.label })
       .write()
   },
+  edit: function(category) {
+    if (category) {
+      return db
+        .get('category')
+        .getById(category.id)
+        .assign(category)
+        .write()
+    }
+  },
   getList: function() {
     return db
       .get('category')
