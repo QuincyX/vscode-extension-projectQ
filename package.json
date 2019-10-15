@@ -2,7 +2,7 @@
   "name": "project-q",
   "displayName": "projectQ",
   "description": "Quincy's project manager toolkit",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "publisher": "quincyx",
   "repository": {
     "type": "git",
@@ -28,11 +28,11 @@
       },
       {
         "command": "projectQ.openProject",
-        "title": "打开项目"
+        "title": "打开项目（当前窗口）"
       },
       {
         "command": "projectQ.openProjectInNewWindow",
-        "title": "在新窗口中打开项目",
+        "title": "打开项目（新窗口）",
         "icon": {
           "light": "image/light/open.svg",
           "dark": "image/dark/open.svg"
@@ -62,14 +62,6 @@
         "command": "projectQ.refresh",
         "title": "刷新列表",
         "icon": "image/refresh.svg"
-      },
-      {
-        "command": "projectQ.list",
-        "title": "列出所有项目"
-      },
-      {
-        "command": "projectQ.active",
-        "title": "projectQ: 激活"
       }
     ],
     "viewsContainers": {

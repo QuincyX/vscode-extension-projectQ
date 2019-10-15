@@ -14,11 +14,6 @@ module.exports = {
       'projectQListView',
       projectListProvider
     )
-    context.subscriptions.push(
-      vscode.commands.registerCommand('projectQ.active', function() {
-        toast('projectQ: 激活成功!')
-      })
-    )
     // 添加新类别
     vscode.commands.registerCommand('projectQ.addCategory', () => {
       vscode.window

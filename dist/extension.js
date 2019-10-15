@@ -19090,11 +19090,6 @@ module.exports = {
       'projectQListView',
       projectListProvider
     )
-    context.subscriptions.push(
-      vscode.commands.registerCommand('projectQ.active', function() {
-        toast('projectQ: 激活成功!')
-      })
-    )
     // 添加新类别
     vscode.commands.registerCommand('projectQ.addCategory', () => {
       vscode.window
@@ -19339,9 +19334,7 @@ module.exports = class ProjectListProvider {
     this.onDidChangeTreeData = this.internalOnDidChangeTreeData.event
   }
   refresh() {
-    console.log('refresh')
     this.internalOnDidChangeTreeData.fire()
-    return
   }
   getTreeItem(element) {
     if (element.contextValue === 'category') {

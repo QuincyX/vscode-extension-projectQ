@@ -12,9 +12,7 @@ module.exports = class ProjectListProvider {
     this.onDidChangeTreeData = this.internalOnDidChangeTreeData.event
   }
   refresh() {
-    console.log('refresh')
     this.internalOnDidChangeTreeData.fire()
-    return
   }
   getTreeItem(element) {
     if (element.contextValue === 'category') {
