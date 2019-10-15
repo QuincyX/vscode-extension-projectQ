@@ -2,7 +2,7 @@
   "name": "project-q",
   "displayName": "projectQ",
   "description": "Quincy's project manager toolkit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "quincyx",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "commands": [
       {
         "command": "projectQ.addProject",
-        "title": "添加当前目录到项目列表"
+        "title": "添加项目"
       },
       {
         "command": "projectQ.openProject",
@@ -32,7 +32,11 @@
       },
       {
         "command": "projectQ.openProjectInNewWindow",
-        "title": "在新窗口中打开项目"
+        "title": "在新窗口中打开项目",
+        "icon": {
+          "light": "image/light/open.svg",
+          "dark": "image/dark/open.svg"
+        }
       },
       {
         "command": "projectQ.deleteProject",
@@ -44,11 +48,11 @@
       },
       {
         "command": "projectQ.changeCategory",
-        "title": "修改项目分组"
+        "title": "修改分组"
       },
       {
         "command": "projectQ.addCategory",
-        "title": "添加新分组"
+        "title": "添加分组"
       },
       {
         "command": "projectQ.deleteCategory",
@@ -56,7 +60,7 @@
       },
       {
         "command": "projectQ.refresh",
-        "title": "刷新项目列表",
+        "title": "刷新列表",
         "icon": "image/refresh.svg"
       },
       {
@@ -65,7 +69,7 @@
       },
       {
         "command": "projectQ.active",
-        "title": "projectQ: active"
+        "title": "projectQ: 激活"
       }
     ],
     "viewsContainers": {
@@ -81,7 +85,7 @@
       "projectQ": [
         {
           "id": "projectQListView",
-          "name": "project list"
+          "name": "项目列表"
         }
       ]
     },
@@ -95,7 +99,7 @@
         {
           "command": "projectQ.openProjectInNewWindow",
           "when": "viewItem == project",
-          "group": "handleOpen"
+          "group": "inline"
         },
         {
           "command": "projectQ.renameProject",

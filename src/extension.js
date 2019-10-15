@@ -1,6 +1,6 @@
 const fs = require('fs')
-const vscode = require('vscode')
 const util = require('./util/index')
+const vscode = require('vscode')
 const ProjectListProvider = require('./view/projectList')
 const controller = require('./controller/index')
 
@@ -10,32 +10,30 @@ function toast(text) {
 module.exports = {
   activate: function(context) {
     const projectListProvider = new ProjectListProvider(context)
-    vscode.window.registerTreeDataProvider('projectQListView', projectListProvider)
-    fs.watchFile(util.getProjectFilePath(), { interval: 100 }, (prev, next) => {
-      util.loadProjectsFile()
-      projectListProvider.refresh()
-    })
+    vscode.window.registerTreeDataProvider(
+      'projectQListView',
+      projectListProvider
+    )
+    // fs.watchFile(util.getProjectFilePath(), { interval: 100 }, (prev, next) => {
+    //   util.loadProjectsFile()
+    //   projectListProvider.refresh()
+    // })
     context.subscriptions.push(
       vscode.commands.registerCommand('projectQ.active', function() {
-        toast('projectQ: extension active!')
+        toast('projectQ: 激活成功!')
       })
     )
     // 添加新类别
     vscode.commands.registerCommand('projectQ.addCategory', () => {
-      let category = {
-        name: ''
-      }
       vscode.window
         .showInputBox({
-          prompt: 'New Project Name',
-          placeHolder: 'Type a name for the category',
-          value: category.name
+          prompt: '新分组的名称',
+          placeHolder: '输入分组名称',
+          value: ''
         })
         .then(label => {
           if (!label) {
-            vscode.window.showWarningMessage(
-              'You must define a new name for the project.'
-            )
+            vscode.window.showWarningMessage('必须输入新分组的名称.')
           } else {
             controller.category.add({ label })
             projectListProvider.refresh()
@@ -48,7 +46,7 @@ module.exports = {
         toast('不能删除默认分类')
       } else {
         controller.category.delete(payload)
-        toast('projectQ: delete category success!')
+        toast('projectQ: 删除分组成功!')
         projectListProvider.refresh()
       }
     })
@@ -56,12 +54,13 @@ module.exports = {
     vscode.commands.registerCommand('projectQ.addProject', () => {
       const categoryList = controller.category.getList()
       vscode.window
-        .showQuickPick(categoryList.map(o => o.id + ': ' + o.label), {
-          placeHolder: 'choose a category'
+        .showQuickPick(categoryList.map(o => o.label + ': ' + o.id), {
+          placeHolder: '选择分组'
         })
         .then(res => {
-          const categoryId = res.split(':')[0]
+          const categoryId = res.split(':')[1]
           controller.project.add(categoryId)
+          toast('projectQ: 添加项目成功!')
           projectListProvider.refresh()
         })
     })
@@ -75,10 +74,10 @@ module.exports = {
     vscode.commands.registerCommand('projectQ.openProject', payload => {
       controller.project.open(payload)
     })
+    // 打开项目（新窗口）
     vscode.commands.registerCommand(
       'projectQ.openProjectInNewWindow',
       payload => {
-        console.log('okok')
         controller.project.openInNewWindow(payload)
       }
     )
@@ -86,15 +85,13 @@ module.exports = {
     vscode.commands.registerCommand('projectQ.renameProject', payload => {
       vscode.window
         .showInputBox({
-          prompt: 'New Project Name',
-          placeHolder: 'Type a new name for the project',
+          prompt: '新名称',
+          placeHolder: '请输入新的项目名',
           value: payload.label
         })
         .then(newName => {
           if (!newName) {
-            vscode.window.showWarningMessage(
-              'You must define a new name for the project.'
-            )
+            vscode.window.showWarningMessage('必须输入新的项目名')
           } else {
             controller.project.edit({ ...payload, label: newName })
             projectListProvider.refresh()
