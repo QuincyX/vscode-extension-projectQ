@@ -14,10 +14,6 @@ module.exports = {
       'projectQListView',
       projectListProvider
     )
-    // fs.watchFile(util.getProjectFilePath(), { interval: 100 }, (prev, next) => {
-    //   util.loadProjectsFile()
-    //   projectListProvider.refresh()
-    // })
     context.subscriptions.push(
       vscode.commands.registerCommand('projectQ.active', function() {
         toast('projectQ: 激活成功!')
@@ -54,11 +50,11 @@ module.exports = {
     vscode.commands.registerCommand('projectQ.addProject', () => {
       const categoryList = controller.category.getList()
       vscode.window
-        .showQuickPick(categoryList.map(o => o.label + ': ' + o.id), {
-          placeHolder: '选择分组'
+        .showQuickPick(categoryList.map(o => o.label + ' - ' + o.id), {
+          placeHolder: '选择项目的分组'
         })
         .then(res => {
-          const categoryId = res.split(':')[1]
+          const categoryId = res.split(' - ')[1]
           controller.project.add(categoryId)
           toast('projectQ: 添加项目成功!')
           projectListProvider.refresh()
