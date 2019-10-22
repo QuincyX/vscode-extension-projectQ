@@ -24,7 +24,7 @@
     "commands": [
       {
         "command": "projectQ.addProject",
-        "title": "添加项目"
+        "title": "%addProject%"
       },
       {
         "command": "projectQ.openProject",
