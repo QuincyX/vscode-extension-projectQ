@@ -52,7 +52,7 @@ module.exports = {
       appData =
         process.env.USERPROFILE ||
         (process.platform === 'darwin'
-          ? process.env.HOME + '/Library/Application Support'
+          ? process.env.HOME
           : '/var/local')
     }
     const folderPath = path.join(appData, channelPath, 'projectQ')

@@ -66,6 +66,7 @@ module.exports = {
           placeHolder: '选择项目的分组'
         })
         .then(res => {
+          
           const categoryId = res.split(' - ')[1]
           controller.project.add(categoryId)
           toast('projectQ: 添加项目成功!')
