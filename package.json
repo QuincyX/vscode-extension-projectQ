@@ -2,7 +2,7 @@
   "name": "project-q",
   "displayName": "projectQ",
   "description": "Quincy's project manager toolkit",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "publisher": "quincyx",
   "repository": {
     "type": "git",
