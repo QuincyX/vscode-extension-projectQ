@@ -1,4 +1,2 @@
 node_modules
-dist*
-dist/extension.js
-dist/extension.js.map
+dist

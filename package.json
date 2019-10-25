@@ -2,7 +2,7 @@
   "name": "project-q",
   "displayName": "projectQ",
   "description": "Quincy's project manager toolkit",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "publisher": "quincyx",
   "repository": {
     "type": "git",
@@ -28,11 +28,15 @@
       },
       {
         "command": "projectQ.openProject",
-        "title": "打开项目（当前窗口）"
+        "title": "%openProject%",
+        "icon": {
+          "light": "image/light/switch.svg",
+          "dark": "image/dark/switch.svg"
+        }
       },
       {
         "command": "projectQ.openProjectInNewWindow",
-        "title": "打开项目（新窗口）",
+        "title": "%openProjectInNewWindow%",
         "icon": {
           "light": "image/light/open.svg",
           "dark": "image/dark/open.svg"
@@ -40,31 +44,31 @@
       },
       {
         "command": "projectQ.deleteProject",
-        "title": "删除项目"
+        "title": "%deleteProject%"
       },
       {
         "command": "projectQ.renameProject",
-        "title": "重命名项目"
+        "title": "%renameProject%"
       },
       {
         "command": "projectQ.changeCategory",
-        "title": "修改分组"
+        "title": "%changeCategory%"
       },
       {
         "command": "projectQ.addCategory",
-        "title": "添加分组"
+        "title": "%addCategory%"
       },
       {
         "command": "projectQ.renameCategory",
-        "title": "修改分组名称"
+        "title": "%renameCategory%"
       },
       {
         "command": "projectQ.deleteCategory",
-        "title": "删除分组"
+        "title": "%deleteCategory%"
       },
       {
         "command": "projectQ.refresh",
-        "title": "刷新列表",
+        "title": "%refresh%",
         "icon": "image/refresh.svg"
       }
     ],
@@ -81,7 +85,7 @@
       "projectQ": [
         {
           "id": "projectQListView",
-          "name": "项目列表"
+          "name": "%projectQListView%"
         }
       ]
     },
@@ -90,12 +94,22 @@
         {
           "command": "projectQ.openProject",
           "when": "viewItem == project",
-          "group": "handleOpen"
+          "group": "inline"
         },
         {
           "command": "projectQ.openProjectInNewWindow",
           "when": "viewItem == project",
           "group": "inline"
+        },
+        {
+          "command": "projectQ.openProject",
+          "when": "viewItem == project",
+          "group": "handleOpen"
+        },
+        {
+          "command": "projectQ.openProjectInNewWindow",
+          "when": "viewItem == project",
+          "group": "handleOpen"
         },
         {
           "command": "projectQ.renameProject",

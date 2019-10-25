@@ -1,3 +1,13 @@
 {
-  "addProject": "add new project"
+  "addProject": "add new project",
+  "openProject": "open a project (current window)",
+  "openProjectInNewWindow": "open a project (new window)",
+  "deleteProject": "delete a priject",
+  "renameProject": "change project's name",
+  "changeCategory": "change project's category",
+  "addCategory": "add a new category",
+  "renameCategory": "change a category's name",
+  "deleteCategory": "delete a category",
+  "refresh": "refresh window",
+  "projectQListView": "project list"
 }

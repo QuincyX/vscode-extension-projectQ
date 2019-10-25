@@ -1,3 +1,13 @@
 {
-  "addProject": "添加项目"
+  "addProject": "添加项目",
+  "openProject": "打开项目（当前窗口）",
+  "openProjectInNewWindow": "打开项目（新窗口）",
+  "deleteProject": "删除项目",
+  "renameProject": "重命名项目",
+  "changeCategory": "修改分组",
+  "addCategory": "添加分组",
+  "renameCategory": "修改分组名称",
+  "deleteCategory": "删除分组",
+  "refresh": "重载窗口",
+  "projectQListView": "项目列表"
 }

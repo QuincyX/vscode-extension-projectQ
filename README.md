@@ -1,34 +1,21 @@
 # projectQ
 
-`Project Quick Switch`，简称`projectQ`
+`projectQ` is short for `Project Quick Switch`
 
-一个 vscode 扩展插件，用于集中管理多个项目并在项目间快速切换
+a extension for visual studio code, which can manage projects and switch project without windows explorer
 
 
 ## Features
 
-- 把多个项目集中保存到统一的面板中管理
-- 快速打开、切换项目，不用离开`vscode`视图
-- 自定义分类用于更方便的管理和组织多个项目
-
-## 已知的问题
-
-- 目前不兼容`mac`系统，数据文件保存的路径是`windows`的用户目录
-- 受限于目前采用的数据保存方式(`lowdb`)，当打开多窗口的时候，修改并不能在多个窗口同步更新
-- 因为已添加的项目可以更改显示名称，所以同一文件夹可以被重复添加（分组类似）
-
-## TO-DO
-
-- 图标
-- 多语言
-- 排序
-- 标签或优先级
+- Manage project in one panel
+- Quick open or switch project
+- Category for projects
 
 ## How to use
 
-- ## 安装插件
+- ## Install
 
-在扩展视图中搜索 `projectQ` 即可找到插件
+Install through VS Code extensions. Search for `projectQ`
 
 - ## 添加文件夹到项目列表
 

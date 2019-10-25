@@ -1,5 +1,3 @@
-const fs = require('fs')
-const util = require('./util/index')
 const vscode = require('vscode')
 const ProjectListProvider = require('./view/projectList')
 const controller = require('./controller/index')
@@ -18,13 +16,15 @@ module.exports = {
     vscode.commands.registerCommand('projectQ.addCategory', () => {
       vscode.window
         .showInputBox({
-          prompt: '新分组的名称',
-          placeHolder: '输入分组名称',
+          prompt: 'category name',
+          placeHolder: 'input category name here',
           value: ''
         })
         .then(label => {
           if (!label) {
-            vscode.window.showWarningMessage('必须输入新分组的名称.')
+            vscode.window.showWarningMessage(
+              'must provide a name for category!'
+            )
           } else {
             controller.category.add({ label })
             projectListProvider.refresh()
@@ -35,13 +35,15 @@ module.exports = {
     vscode.commands.registerCommand('projectQ.renameCategory', payload => {
       vscode.window
         .showInputBox({
-          prompt: '分组名称',
-          placeHolder: '请输入新的分组名',
+          prompt: 'category name',
+          placeHolder: 'input category name here',
           value: payload.label
         })
         .then(newName => {
           if (!newName) {
-            vscode.window.showWarningMessage('必须输入新的分组名称')
+            vscode.window.showWarningMessage(
+              'must provide a name for category!'
+            )
           } else {
             controller.category.edit({ id: payload.id, label: newName })
             projectListProvider.refresh()
@@ -51,10 +53,10 @@ module.exports = {
     // 删除选中分组，该分组下的项目转移至default分组
     vscode.commands.registerCommand('projectQ.deleteCategory', payload => {
       if (payload.id === 'default') {
-        toast('不能删除默认分类')
+        toast('can not delete the default category')
       } else {
         controller.category.delete(payload)
-        toast('projectQ: 删除分组成功!')
+        toast('projectQ: delete a  category success!')
         projectListProvider.refresh()
       }
     })
@@ -63,20 +65,19 @@ module.exports = {
       const categoryList = controller.category.getList()
       vscode.window
         .showQuickPick(categoryList.map(o => o.label + ' - ' + o.id), {
-          placeHolder: '选择项目的分组'
+          placeHolder: 'choose category'
         })
         .then(res => {
-          
           const categoryId = res.split(' - ')[1]
           controller.project.add(categoryId)
-          toast('projectQ: 添加项目成功!')
+          toast('projectQ: add new project success!')
           projectListProvider.refresh()
         })
     })
     // 从列表中删除选中类别
     vscode.commands.registerCommand('projectQ.deleteProject', payload => {
       controller.project.delete(payload)
-      toast('projectQ: 删除项目成功!')
+      toast('projectQ: delete project success!')
       projectListProvider.refresh()
     })
     // 打开项目（切换项目）
@@ -94,13 +95,13 @@ module.exports = {
     vscode.commands.registerCommand('projectQ.renameProject', payload => {
       vscode.window
         .showInputBox({
-          prompt: '新名称',
-          placeHolder: '请输入新的项目名',
+          prompt: 'project name',
+          placeHolder: 'input project name here',
           value: payload.label
         })
         .then(newName => {
           if (!newName) {
-            vscode.window.showWarningMessage('必须输入新的项目名')
+            vscode.window.showWarningMessage('must provide a name for project!')
           } else {
             controller.project.edit({ ...payload, label: newName })
             projectListProvider.refresh()
@@ -112,7 +113,7 @@ module.exports = {
       const categoryList = controller.category.getList()
       vscode.window
         .showQuickPick(categoryList.map(o => o.label + ' - ' + o.id), {
-          placeHolder: '选择项目分组'
+          placeHolder: 'choose category'
         })
         .then(res => {
           const categoryId = res.split(' - ')[1]
@@ -122,6 +123,7 @@ module.exports = {
     })
     // 刷新视图
     vscode.commands.registerCommand('projectQ.refresh', () => {
+      vscode.commands.executeCommand('workbench.action.reloadWindow')
       projectListProvider.refresh()
     })
   }
