@@ -18,7 +18,6 @@ module.exports = {
     )
   },
   openInNewWindow: function(project) {
-
     return vscode.commands.executeCommand(
       'vscode.openFolder',
       vscode.Uri.file(project.rootPath),
@@ -49,10 +48,36 @@ module.exports = {
       .assign({ category })
       .write()
   },
+  addProjectTag(projectId, tag) {
+    return db
+      .get('project')
+      .getById(projectId)
+      .assign({ tags: [tag] })
+      .write()
+  },
+  deleteProjectTag(projectId) {
+    return db
+      .get('project')
+      .getById(projectId)
+      .assign({ tags: [] })
+      .write()
+  },
   getListByCategory(category) {
     return db
       .get('project')
       .filter({ category })
+      .value()
+      .map(e => {
+        return {
+          ...e,
+          contextValue: 'project'
+        }
+      })
+  },
+  getListByTag(tag) {
+    return db
+      .get('project')
+      .filter(val => val.tags && val.tags.includes(tag))
       .value()
       .map(e => {
         return {

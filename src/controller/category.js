@@ -1,4 +1,3 @@
-const vscode = require('vscode')
 const db = require('../service/db')
 const shortid = require('shortid')
 
