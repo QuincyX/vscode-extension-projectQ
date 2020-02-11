@@ -1,7 +1,7 @@
 const vscode = require('vscode')
 const controller = require('../controller/index')
 
-module.exports = class ProjectListProvider {
+module.exports = class TagListProvider {
   constructor(context) {
     this.listIconPath = context.asAbsolutePath('image/icon/list.svg')
     this.folderIconPath = {
@@ -14,11 +14,18 @@ module.exports = class ProjectListProvider {
   refresh() {
     this.internalOnDidChangeTreeData.fire()
   }
+  getChildren(payload) {
+    return controller.project.getListByTag('star')
+    if (payload) {
+      return controller.project.getListByTag(payload.id)
+    } else {
+      return controller.tag.getList()
+    }
+  }
   getTreeItem(element) {
     if (element.contextValue === 'category') {
       return {
         ...element
-        // iconPath: this.listIconPath
       }
     } else {
       return {
@@ -30,16 +37,6 @@ module.exports = class ProjectListProvider {
           arguments: [element.rootPath]
         }
       }
-    }
-  }
-  getParent() {
-    console.log('getParent')
-  }
-  getChildren(category) {
-    if (category) {
-      return controller.project.getListByCategory(category.id)
-    } else {
-      return controller.category.getList()
     }
   }
 }

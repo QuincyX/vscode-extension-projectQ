@@ -17,45 +17,48 @@ a extension for visual studio code, which can manage projects and switch project
 
 Install through VS Code extensions. Search for `projectQ`
 
-- ## 添加文件夹到项目列表
+- ## add project
 
-点击 `ProjectQ` 视图顶部的菜单按钮，选择`添加项目`，在弹出的提示框中选择所属的分组
-> 每个被添加的项目都有一个ID，所以您可以把同一个文件夹添加到不同的分组中
+Click `add project` button in extend menu at the top of `ProjectQ` panel, then choose category for current project
+> each project have a unique id after add, one real project can be add many times
 
-- ## 添加项目分组
+- ## add category
 
-点击 `ProjectQ` 视图顶部的菜单按钮，选择`添加分组`
+Click `add category` button in extend menu at the top of `ProjectQ` panel, then type name for current category
 
 ![add](./image/resource/add.png)
 
-- ## 切换项目（在当前窗口打开文件夹）
+- ## switch project (open project in current window)
 
-右键点击 `ProjectQ` 视图中的项目，选择`打开项目（当前窗口）`
+right click or mouse hover the project item in `projectQ` panel, choose `open a project (current window)`
 
-- ## 打开项目（在新窗口打开文件夹）
+- ## open project (open project in new window)
 
-在 `ProjectQ` 视图中，点击或指向一个项目，右侧即显示`打开项目（新窗口）`
+right click or mouse hover the project item in `projectQ` panel, choose `open a project (new window)`
 
 ![add](./image/resource/open1.png)
 
-- ## 修改项目分组
+- ## change project's category
 
-在 `ProjectQ` 视图中，右键点击列表中的项目，选择`修改分组`
+right click the project item in `projectQ` panel, choose `change project's category`
 
-- ## 修改项目显示名称
+- ## change project's display name
 
-在 `ProjectQ` 视图中，右键点击列表中的项目，选择`重命名项目`
+right click the project item in `projectQ` panel, choose `change project's name`
 
-- ## 删除项目
+- ## delete project
 
-在 `ProjectQ` 视图中，右键点击列表中的项目，选择`删除项目`
-> 从`ProjectQ`中删除项目不会影响您的原始文件
+right click the project item in `projectQ` panel, choose `delete a project`
+> delete project in `ProjectQ` won't effect file
 
 ![open](./image/resource/open.png)
 
-- ## 修改分组
+- ## change category
 
-在 `ProjectQ` 视图中，右键点击列表中的分组，选择`修改分组名称`
-> 如果被删除的分组不为空，这些项目会被转移至`default`分组中
-> `default`分组不允许删除，但可以自定义显示名称
+right click the category item in `projectQ` panel, choose `change a category's name`
 
+- ## delete category
+
+right click the category item in `projectQ` panel, choose `delete a category`
+> the project in current category will move to the `default` category
+> the `default` category can't be removed, but you can edit the display name

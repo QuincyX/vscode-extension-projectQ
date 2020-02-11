@@ -2,10 +2,10 @@ const path = require('path')
 
 module.exports = {
   target: 'node',
-  entry: './src/extension.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'extension.js',
+    filename: 'index.js',
     libraryTarget: 'commonjs2',
     devtoolModuleFilenameTemplate: '../[resource-path]'
   },

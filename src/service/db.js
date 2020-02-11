@@ -15,7 +15,12 @@ db.defaults({
     }
   ],
   project: [],
-  tag: []
+  tag: [
+    {
+      id: 'star',
+      label: 'star'
+    }
+  ]
 }).write()
 
 module.exports = db

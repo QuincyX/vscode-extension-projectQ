@@ -1,6 +1,5 @@
 const vscode = require('vscode')
 const fs = require('fs')
-const os = require('os')
 const path = require('path')
 const util = require('util')
 
@@ -51,9 +50,7 @@ module.exports = {
     } else {
       appData =
         process.env.USERPROFILE ||
-        (process.platform === 'darwin'
-          ? process.env.HOME
-          : '/var/local')
+        (process.platform === 'darwin' ? process.env.HOME : '/var/local')
     }
     const folderPath = path.join(appData, channelPath, 'projectQ')
     const filePath = path.join(folderPath, fileName)
@@ -68,15 +65,33 @@ module.exports = {
           category: [
             {
               id: 'default',
-              label: 'default',
+              label: '💡default',
               tooltip: 'default project list'
             }
           ],
-          project: [],
-          tags: []
+          project: [
+            {
+              label: '😝User Home',
+              rootPath: this.getUserHomePath(),
+              category: 'default',
+              id: 'default-user-home-path',
+              contextValue: 'project',
+              tags: ['star']
+            }
+          ],
+          tag: [
+            {
+              id: 'star',
+              label: '⭐star',
+              tooltip: 'default tag'
+            }
+          ]
         })
       )
     }
     return filePath
+  },
+  getUserHomePath() {
+    return process.env.HOME
   }
 }

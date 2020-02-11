@@ -8,6 +8,9 @@
   "addCategory": "添加分组",
   "renameCategory": "修改分组名称",
   "deleteCategory": "删除分组",
+  "addProjectTag": "添加收藏",
+  "deleteProjectTag": "取消收藏",
   "refresh": "重载窗口",
-  "projectQListView": "项目列表"
+  "projectQListView": "项目列表",
+  "projectQTagView": "已加标签"
 }
