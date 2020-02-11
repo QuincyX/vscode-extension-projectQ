@@ -3,7 +3,7 @@
   "displayName": "projectQ",
   "description": "Quincy's project manager toolkit",
   "icon": "image/icon/logo.png",
-  "version": "0.1.9",
+  "version": "0.2.3",
   "publisher": "quincyx",
   "repository": {
     "type": "git",
@@ -15,7 +15,7 @@
   "categories": [
     "Other"
   ],
-  "main": "./dist/index.js",
+  "main": "./dist/extension.js",
   "activationEvents": [
     "*",
     "onView:projectQListView",
@@ -179,7 +179,7 @@
   },
   "scripts": {
     "dev": "webpack --watch --mode development --info-verbosity verbose",
-    "build": "webpack --mode development",
+    "package": "webpack --mode production && vsce package -o ./release",
     "vscode:prepublish": "webpack --mode production",
     "test": "node ./test/runTest.js"
   },
