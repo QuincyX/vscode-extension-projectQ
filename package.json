@@ -3,7 +3,7 @@
   "displayName": "projectQ",
   "description": "Quincy's project manager toolkit",
   "icon": "image/icon/logo.png",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "publisher": "quincyx",
   "repository": {
     "type": "git",
@@ -79,6 +79,10 @@
         "command": "projectQ.refresh",
         "title": "%refresh%",
         "icon": "image/icon/refresh.svg"
+      },
+      {
+        "command": "projectQ.changeDir",
+        "title": "%changeDir%"
       }
     ],
     "viewsContainers": {
@@ -151,6 +155,10 @@
         {
           "command": "projectQ.deleteProjectTag",
           "when": "view == projectQTagView && viewItem == project"
+        },
+        {
+          "command": "projectQ.changeDir",
+          "when": "view == projectQListView && viewItem == project"
         }
       ],
       "view/title": [

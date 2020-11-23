@@ -12,5 +12,6 @@
   "deleteProjectTag": "cancle favorite",
   "refresh": "refresh window",
   "projectQListView": "project list",
-  "projectQTagView": "tag"
+  "projectQTagView": "tag",
+  "changeDir": "Update the project source address"
 }

@@ -7,7 +7,7 @@ function toast(text) {
   return vscode.window.showInformationMessage(text)
 }
 module.exports = {
-  activate: function(context) {
+  activate: function (context) {
     const projectListProvider = new ProjectListProvider(context)
     vscode.window.createTreeView('projectQListView', {
       treeDataProvider: projectListProvider,
@@ -149,6 +149,25 @@ module.exports = {
       vscode.commands.executeCommand('workbench.action.reloadWindow')
       projectListProvider.refresh()
       tagListProvider.refresh()
+    })
+
+    // 更新项目根目录
+    vscode.commands.registerCommand('projectQ.changeDir', payload => {
+      vscode.window
+        .showInputBox({
+          prompt: 'project directory',
+          placeHolder: 'input new project directory',
+          value: payload.rootPath
+        })
+        .then(newPath => {
+          if (!newPath) {
+            vscode.window.showWarningMessage('must provide a directory for project!')
+          } else {
+            controller.project.changeDir({ ...payload, rootPath: newPath })
+            projectListProvider.refresh()
+            tagListProvider.refresh()
+          }
+        })
     })
   }
 }
