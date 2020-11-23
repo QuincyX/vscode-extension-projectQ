@@ -3,7 +3,7 @@
   "displayName": "projectQ",
   "description": "Quincy's project manager toolkit",
   "icon": "image/icon/logo.png",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "publisher": "quincyx",
   "repository": {
     "type": "git",
