@@ -3,28 +3,28 @@ const util = require('../util/index')
 const db = require('../service/db')
 
 module.exports = {
-  add: function(category = 'default') {
+  add: function (category = 'default') {
     const workspaceInfo = util.getWorkspaceInfo()
     return db
       .get('project')
       .insert({ ...workspaceInfo, category })
       .write()
   },
-  open: function(project) {
+  open: function (project) {
     return vscode.commands.executeCommand(
       'vscode.openFolder',
       vscode.Uri.file(project.rootPath),
       false
     )
   },
-  openInNewWindow: function(project) {
+  openInNewWindow: function (project) {
     return vscode.commands.executeCommand(
       'vscode.openFolder',
       vscode.Uri.file(project.rootPath),
       true
     )
   },
-  delete: function(project) {
+  delete: function (project) {
     if (project) {
       return db
         .get('project')
@@ -32,7 +32,7 @@ module.exports = {
         .write()
     }
   },
-  edit: function(project) {
+  edit: function (project) {
     if (project) {
       return db
         .get('project')
@@ -85,5 +85,15 @@ module.exports = {
           contextValue: 'project'
         }
       })
+  },
+  // 更新项目根目录
+  changeDir(project) {
+    if (project) {
+      return db
+        .get('project')
+        .getById(project.id)
+        .assign(project)
+        .write()
+    }
   }
 }

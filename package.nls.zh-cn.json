@@ -12,5 +12,6 @@
   "deleteProjectTag": "取消收藏",
   "refresh": "重载窗口",
   "projectQListView": "项目列表",
-  "projectQTagView": "已加标签"
+  "projectQTagView": "已加标签",
+  "changeDir": "更新项目源地址"
 }
